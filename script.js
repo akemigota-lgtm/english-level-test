@@ -22,7 +22,8 @@ function showQuestion(){
 selectedAnswer=null;
 
 const q=questions[currentQuestion];
-
+document.getElementById("questionNumber").textContent =
+`Вопрос ${currentQuestion + 1} из ${questions.length}`;
 document.getElementById("question").textContent=q.question;
 
 const answers=document.getElementById("answers");
