@@ -22,8 +22,7 @@ function showQuestion(){
 selectedAnswer=null;
 
 const q=questions[currentQuestion];
-document.getElementById("questionNumber").textContent =
-`Вопрос ${currentQuestion + 1} из ${questions.length}`;
+
 document.getElementById("question").textContent=q.question;
 
 const answers=document.getElementById("answers");
@@ -80,31 +79,9 @@ document.getElementById("quiz").style.display="none";
 
 document.getElementById("result").style.display="block";
 
-let level = "";
+document.getElementById("score").innerHTML=
 
-if (score <= 5) {
-    level = "A1 Beginner";
-} else if (score <= 10) {
-    level = "A2 Elementary";
-} else if (score <= 15) {
-    level = "B1 Intermediate";
-} else if (score <= 20) {
-    level = "B2 Upper-Intermediate";
-} else if (score <= 25) {
-    level = "C1 Advanced";
-} else {
-    level = "C2 Proficient";
-}
-
-document.getElementById("score").innerHTML = `
-<h1>🎉 Тест завершён!</h1>
-
-<p><b>Правильных ответов:</b> ${score} из ${questions.length}</p>
-
-<h2>Ваш уровень английского:</h2>
-
-<h1 style="color:#3b82f6;">${level}</h1>
-`;
+`Ваш результат: ${score} из ${questions.length}`;
 
 return;
 
