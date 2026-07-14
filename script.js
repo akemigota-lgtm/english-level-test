@@ -4,89 +4,68 @@ let selectedAnswer = null;
 
 const startBtn = document.getElementById("startBtn");
 const nextBtn = document.getElementById("nextBtn");
+const progressBar = document.getElementById("progressBar");
 
 startBtn.addEventListener("click", startTest);
 nextBtn.addEventListener("click", nextQuestion);
 
 function startTest(){
 
-document.getElementById("start-screen").style.display="none";
-document.getElementById("quiz").style.display="block";
+    document.getElementById("start-screen").style.display = "none";
+    document.getElementById("quiz").style.display = "block";
 
-showQuestion();
+    showQuestion();
 
 }
 
 function showQuestion(){
 
-selectedAnswer=null;
+    selectedAnswer = null;
 
-const q=questions[currentQuestion];
+    const q = questions[currentQuestion];
 
-document.getElementById("question").textContent=q.question;
+    document.getElementById("questionNumber").textContent =
+    `Вопрос ${currentQuestion + 1} из ${questions.length}`;
 
-const answers=document.getElementById("answers");
+    document.getElementById("question").textContent = q.question;
 
-answers.innerHTML="";
+    progressBar.style.width =
+    ((currentQuestion) / questions.length * 100) + "%";
 
-q.answers.forEach((answer,index)=>{
+    const answers = document.getElementById("answers");
 
-const div=document.createElement("div");
+    answers.innerHTML = "";
 
-div.className="answer";
+    q.answers.forEach((answer,index)=>{
 
-div.textContent=answer;
+        const div = document.createElement("div");
 
-div.onclick=function(){
+        div.className = "answer";
 
-selectedAnswer=index;
+        div.textContent = answer;
 
-document.querySelectorAll(".answer").forEach(el=>{
+        div.onclick = function(){
 
-el.style.background="#334155";
+            selectedAnswer = index;
 
-});
+            document.querySelectorAll(".answer").forEach(el=>{
 
-div.style.background="#3b82f6";
+                el.style.background="#334155";
+                el.style.border="2px solid transparent";
 
-nextBtn.style.display="inline-block";
+            });
 
-};
+            div.style.background="#2563eb";
+            div.style.border="2px solid white";
 
-answers.appendChild(div);
+            nextBtn.style.display="block";
 
-});
+        };
 
-nextBtn.style.display="none";
+        answers.appendChild(div);
 
-}
+    });
 
-function nextQuestion(){
-
-if(selectedAnswer===null) return;
-
-if(selectedAnswer===questions[currentQuestion].correct){
-
-score++;
-
-}
-
-currentQuestion++;
-
-if(currentQuestion>=questions.length){
-
-document.getElementById("quiz").style.display="none";
-
-document.getElementById("result").style.display="block";
-
-document.getElementById("score").innerHTML=
-
-`Ваш результат: ${score} из ${questions.length}`;
-
-return;
-
-}
-
-showQuestion();
+    nextBtn.style.display="none";
 
 }
