@@ -1,44 +1,58 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>English Level Test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Level Test</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <div class="container">
 
-<h1>English Level Test</h1>
+    <h1>English Level Test</h1>
 
-<div id="start-screen">
-<p>Определи свой уровень английского</p>
+    <div id="start-screen">
 
-<button id="startBtn">
-Начать тест
-</button>
-</div>
+        <p>Определи свой уровень английского</p>
 
-<div id="quiz" style="display:none">
+        <button id="startBtn">
+            Начать тест
+        </button>
 
-<h3 id="questionNumber"></h3>
-  
-<h2 id="question"></h2>
+    </div>
 
-<div id="answers"></div>
+    <div id="quiz" style="display:none;">
 
-<button id="nextBtn" style="display:none">
-Следующий вопрос
-</button>
+        <div class="progress">
+            <div id="progressBar"></div>
+        </div>
 
-</div>
+        <h3 id="questionNumber"></h3>
 
-<div id="result" style="display:none">
-<h2 id="score"></h2>
-</div>
+        <h2 id="question"></h2>
+
+        <div id="answers"></div>
+
+        <button id="nextBtn" style="display:none;">
+            Следующий вопрос
+        </button>
+
+    </div>
+
+    <div id="result" style="display:none;">
+
+        <h1>🎉 Тест завершён!</h1>
+
+        <div id="score"></div>
+
+        <button onclick="location.reload()">
+            Пройти ещё раз
+        </button>
+
+    </div>
 
 </div>
 
