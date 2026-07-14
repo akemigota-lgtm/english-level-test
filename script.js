@@ -2,59 +2,91 @@ let currentQuestion = 0;
 let score = 0;
 let selectedAnswer = null;
 
-function startTest() {
-    document.getElementById("start-screen").style.display = "none";
-    document.getElementById("quiz").style.display = "block";
-    showQuestion();
+const startBtn = document.getElementById("startBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+startBtn.addEventListener("click", startTest);
+nextBtn.addEventListener("click", nextQuestion);
+
+function startTest(){
+
+document.getElementById("start-screen").style.display="none";
+document.getElementById("quiz").style.display="block";
+
+showQuestion();
+
 }
 
-function showQuestion() {
-    selectedAnswer = null;
+function showQuestion(){
 
-    const q = questions[currentQuestion];
+selectedAnswer=null;
 
-    document.getElementById("question").innerText = q.question;
+const q=questions[currentQuestion];
 
-    const answersDiv = document.getElementById("answers");
-    answersDiv.innerHTML = "";
+document.getElementById("question").textContent=q.question;
 
-    q.answers.forEach((answer, index) => {
-        const btn = document.createElement("div");
-        btn.className = "answer";
-        btn.innerText = answer;
+const answers=document.getElementById("answers");
 
-        btn.onclick = () => {
-            selectedAnswer = index;
+answers.innerHTML="";
 
-            document.querySelectorAll(".answer").forEach(el => {
-                el.style.background = "#334155";
-            });
+q.answers.forEach((answer,index)=>{
 
-            btn.style.background = "#3b82f6";
-            document.getElementById("nextBtn").style.display = "inline-block";
-        };
+const div=document.createElement("div");
 
-        answersDiv.appendChild(btn);
-    });
+div.className="answer";
 
-    document.getElementById("nextBtn").style.display = "none";
+div.textContent=answer;
+
+div.onclick=function(){
+
+selectedAnswer=index;
+
+document.querySelectorAll(".answer").forEach(el=>{
+
+el.style.background="#334155";
+
+});
+
+div.style.background="#3b82f6";
+
+nextBtn.style.display="inline-block";
+
+};
+
+answers.appendChild(div);
+
+});
+
+nextBtn.style.display="none";
+
 }
 
-function nextQuestion() {
-    if (selectedAnswer === questions[currentQuestion].correct) {
-        score++;
-    }
+function nextQuestion(){
 
-    currentQuestion++;
+if(selectedAnswer===null) return;
 
-    if (currentQuestion >= questions.length) {
-        document.getElementById("quiz").style.display = "none";
-        document.getElementById("result").style.display = "block";
+if(selectedAnswer===questions[currentQuestion].correct){
 
-        document.getElementById("score").innerHTML =
-            `Ваш результат: ${score} из ${questions.length}`;
-        return;
-    }
+score++;
 
-    showQuestion();
+}
+
+currentQuestion++;
+
+if(currentQuestion>=questions.length){
+
+document.getElementById("quiz").style.display="none";
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("score").innerHTML=
+
+`Ваш результат: ${score} из ${questions.length}`;
+
+return;
+
+}
+
+showQuestion();
+
 }
